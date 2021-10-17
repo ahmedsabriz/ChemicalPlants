@@ -13,6 +13,8 @@ close all
 clear vars
 
 % Physical Properties
+% L refers to liquid water
+% G refers to evaporated water
 L_in=18000;             % [kg/h]
 G_in=13000;             % [kg/h]
 TL_in=60;               % [°C]
@@ -23,7 +25,9 @@ Z=0.6;      			% [-] relative humidity
 Cu=0.26;        		% [kcal/kg*K]
 CpL=1;          		% [kcal/kg*K]
 DHev=580;       		% [kcal/kg]
-hga=5000;       		% [kcal/m/h/K]
+
+% Heat transfer coefficients per unit of length
+hga=5000;       		% [kcal/m/h/K] 
 hla=28000;              % [kcal/m/h/K]
 
 % Vapor Pressure Correlation
@@ -32,8 +36,8 @@ B=2.71;                 % Pev 2nd coeff mmHg vs °C
 
 % Humidity
 Ps=A+B*TG_in;           % [mmHg]
-Us=0.62*Ps/P;           % [molw / molair]
-U_in=Z*Us;              % [molw / molair]
+Us=0.62*Ps/P;           % [mol_w / mol_air]
+U_in=Z*Us;              % [mol_w / mol_air]
 Gdry=G_in/(1+U_in);     % [kg/h]
 
 % Mass transfer Coefficient from Lewis equation
@@ -114,7 +118,8 @@ G   = y(3);
 TL  = y(4);
 TG  = y(5);
 
-% Calculating Temperature and Humidity at interface
+% Temperature and Humidity at interface
+% From heat balance on the adiabatic system
 Ti=(hla*TL+hga*TG+Kua*DHev*(U-0.62*A/P))/(hla+hga+Kua*DHev*0.62*B/P);
 Ui=0.62*(A+B*Ti)/P;
 
