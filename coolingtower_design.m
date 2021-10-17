@@ -46,9 +46,11 @@ Kua=hga/Cu;             % [kg/m/h]
 % Countercurrent iterations
 max_iterations = 100;
 step = 0.005;
-height_guess = 10;
-L_out_guess = L_in;     % First guess value for water outlet flowrate
 tollerance = 0.5;
+
+% First guess values
+height_guess = 10;
+L_out_guess = L_in;
 
 % Integration
 for i = 1:max_iterations
